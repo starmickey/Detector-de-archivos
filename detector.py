@@ -43,6 +43,9 @@ if __name__ == "__main__":
     excluded_words = {"datacompbd", "datacompgeneral", "abcupload4", "aspsmartupload", "control_licencia"}
     
     asp_files = get_files(directory, file_pattern)
+
+    print("ASP files", asp_files)
+    
     results = filter_files_by_pattern(asp_files, search_pattern, excluded_words)
 
     if results:
