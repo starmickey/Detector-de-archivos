@@ -1,6 +1,7 @@
 import os
 import re
 import pandas as pd
+from datetime import datetime
 
 def get_files(directory, file_pattern):
     files_list = []
@@ -36,7 +37,7 @@ def export_results_to_excel(results, output_file):
 
 if __name__ == "__main__":
     directory = "ejemplos"
-    output_file = "results.xlsx"
+    output_file = f"store-proc-list-{datetime.today().strftime('%Y-%m-%dT%H-%M-%S')}.xlsx"
     file_pattern = ".asp"
     search_pattern = r'Server\.CreateObject\([\'"]([^\'"]+)[\'"]\)'
     excluded_words = {"datacompbd", "datacompgeneral", "abcupload4", "aspsmartupload", "control_licencia"}
