@@ -12,7 +12,7 @@ def get_files(directory, file_pattern):
 
 def is_in_phrase(flag, text):
     """Checks if a flag word appears as a whole word in the given text."""
-    flag_pattern = rf'\b{re.escape(flag)}'
+    flag_pattern = rf'(?<!\w){re.escape(flag)}(?!\w)'
     return bool(re.search(flag_pattern, text, re.IGNORECASE))
 
 def filter_files_by_pattern(files, pattern, excluded_words, start_flag=None):
