@@ -42,19 +42,3 @@ def filter_files_and_export_txt(files, pattern, excluded_words, output_file):
                 print("Error reading {}: {}".format(file_path, e))
     
     print("Results saved to {}".format(output_file))
-
-if __name__ == "__main__":
-    directory = "../trilay"
-    timestamp = datetime.today().strftime("%Y-%m-%dT%H-%M-%S")
-    txt_output_file = "store-proc-list-{}.txt".format(timestamp)
-    file_pattern = ".asp"
-    search_pattern = r"Server\.CreateObject\(['\"]([^'\"]+)['\"]\)"
-    excluded_words = {"datacompbd", "datacompgeneral", "abcupload4", "aspsmartupload", "control_licencia"}
-    
-    asp_files = get_files(directory, file_pattern)
-    print("ASP files", asp_files)
-    
-    if asp_files:
-        filter_files_and_export_txt(asp_files, search_pattern, excluded_words, txt_output_file)
-    else:
-        print("No matching files found.")

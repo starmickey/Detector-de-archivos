@@ -1,5 +1,4 @@
 venv/
 *.xlsx
 *.txt
-ejemplos/
-results/
+*.ipynb
