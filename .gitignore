@@ -1,6 +1,6 @@
 venv/
+lab/
 *.xlsx
 *.txt
-*.ipynb
 *.asp
 *.pyc
