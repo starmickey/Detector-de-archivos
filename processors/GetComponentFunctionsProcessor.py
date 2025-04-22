@@ -8,14 +8,19 @@ class GetComponentFunctionsProcessor(CodeProcessor):
     It looks for patterns in the code (e.g., server.CreateObject), extracts the relevant details, and
     exports the results to an Excel file, appending new results if the file already exists.
     """
-    def __init__(self, directory_path, excluded_words=None):
+    def __init__(self, directory_path, excluded_words=None, omit_directories=[]):
         """
         Initialize the processor with directory_path and optional excluded_words.
         """
         if excluded_words is None:
             excluded_words = []
         # Call the parent constructor with appropriate arguments
-        super().__init__(directory_path, allowed_extensions=['asp'], excluded_words=excluded_words)
+        super().__init__(
+            directory_path,
+            allowed_extensions=['asp'],
+            excluded_words=excluded_words,
+            omit_directories=omit_directories
+        )
 
 
     def _process_file(self, file_name):

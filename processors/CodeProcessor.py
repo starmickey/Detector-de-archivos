@@ -10,7 +10,7 @@ class CodeProcessor(ABC):
     Abstract base class for processing code files, extracting component functions, and exporting results.
     """
 
-    def __init__(self, directory_path, allowed_extensions, excluded_words):
+    def __init__(self, directory_path, allowed_extensions, excluded_words, omit_directories = []):
         """
         Initializes the CodeProcessor with the directory to process, allowed file extensions,
         and the excluded words for function names.
@@ -18,6 +18,7 @@ class CodeProcessor(ABC):
         self.directory_path = directory_path
         self.allowed_extensions = allowed_extensions
         self.excluded_words = excluded_words
+        self.omit_directories = omit_directories
         self.results = None
 
     @abstractmethod
@@ -138,7 +139,7 @@ class CodeProcessor(ABC):
         if self.results is not None:
             return self.results
 
-        directory = Directory(self.directory_path)
+        directory = Directory(self.directory_path, omit_directories=self.omit_directories)
 
         # List to accumulate all results
         all_results = []
@@ -161,7 +162,7 @@ class CodeProcessor(ABC):
         if output_file is None:
             raise ValueError("Output file is not defined")
 
-        directory = Directory(self.directory_path)
+        directory = Directory(self.directory_path, omit_directories=self.omit_directories)
 
         for file_name in directory.get_files_by_extensions(self.allowed_extensions):
             results = self._process_file(file_name)

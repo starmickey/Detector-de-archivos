@@ -4,7 +4,7 @@ import re
 class Directory:
     files = None  # Lista que almacenará los archivos encontrados en el directorio
 
-    def __init__(self, path):
+    def __init__(self, path, omit_directories = []):
         """
         Constructor de la clase Directory.
 
@@ -12,6 +12,7 @@ class Directory:
         - path (str): Ruta del directorio donde se buscarán los archivos.
         """
         self.path = path
+        self.omit_directories = omit_directories
 
     def _collect_files(self):
         """
@@ -22,7 +23,10 @@ class Directory:
         """
         self.files = []  # Inicializa la lista de archivos
 
-        for root, _, files in os.walk(self.path):  # Recorre el directorio y subdirectorios
+        for root, dirs, files in os.walk(self.path):  # Recorre el directorio y subdirectorios
+            # Filter directories to omit
+            dirs[:] = [d for d in dirs if d not in self.omit_directories]
+
             for file in files:
                 self.files.append(os.path.join(root, file))  # Añade la ruta completa del archivo a la lista
 
