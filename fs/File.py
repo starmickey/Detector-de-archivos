@@ -1,5 +1,4 @@
 class File:
-    lines = []  # Lista que almacenará las líneas del archivo
 
     def __init__(self, path):
         """
@@ -9,6 +8,7 @@ class File:
         - path (str): Ruta del archivo que se va a leer.
         """
         self.path = path
+        self.lines = []  # Lista que almacenará las líneas del archivo
         self._collect_lines()  # Llama al método para recolectar las líneas del archivo
 
     def _collect_lines(self):
