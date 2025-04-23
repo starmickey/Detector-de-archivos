@@ -1,5 +1,6 @@
 import os
 import re
+from fs.File import File
 from processors.CodeProcessor import CodeProcessor
 
 class GetComponentFunctionsProcessor(CodeProcessor):
@@ -69,7 +70,8 @@ class GetComponentFunctionsProcessor(CodeProcessor):
                     if not any(excluded.lower() in function_name.lower() for excluded in self.excluded_words):
                         results.append({
                             "File path": file_name,
-                            "File name": os.path.basename(file_name),  # Extract only the file name
+                            "File name": File.get_file_name(file_name),  # Extract only the file name
+                            "Module": File.get_last_subdirectory(file_name),
                             "Line": line, 
                             "Component": classes[i],
                             "Function": function_name
